@@ -211,16 +211,70 @@ public class Main extends JavaPlugin implements Listener {
             switch (args.length) {
                 case 2:
                     if(args[0].equalsIgnoreCase("exclude")) {
-                        this.setExcluded(args[1]);
                         System.out.print("Console attempting to set player excluded...");
+                            sender.sendMessage(ChatColor.DARK_RED+"Attempting to set player excluded...");
+                            if(Bukkit.getPlayer(args[1]) == null) {
+                                //Offline
+                                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[1]);
+                                if(!this.settings.getStringList("Excluded-Players").contains(offlinePlayer.getUniqueId().toString())) {
+                                    sender.sendMessage(ChatColor.RED+"- Excluded -");
+                                } else {
+                                    sender.sendMessage(ChatColor.GRAY+"ERROR: Found player "+args[1]+" on Excluded-Players list...");
+                                }
+                            } else {
+                                //Online
+                                Player offlinePlayer = Bukkit.getPlayer(args[1]);
+                                if(!this.settings.getStringList("Excluded-Players").contains(offlinePlayer.getUniqueId().toString())) {
+                                    sender.sendMessage(ChatColor.RED+"- Excluded -");
+                                } else {
+                                    sender.sendMessage(ChatColor.GRAY+"ERROR: Found player "+args[1]+" on Excluded-Players list...");
+                            }
+                        }
+                        this.setExcluded(args[1]);
                     } else
                     if(args[0].equalsIgnoreCase("unban")) {
-                        this.unbanPlayer(args[1]);
                         System.out.print("Console attempting to set player unbanned...");
+                            sender.sendMessage(ChatColor.DARK_RED+"Attempting to set player unbanned...");
+                            if(Bukkit.getPlayer(args[1]) == null) {
+                                //Offline
+                                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[1]);
+                                if(this.settings.getStringList("Banned-Players").contains(offlinePlayer.getUniqueId().toString())) {
+                                    sender.sendMessage(ChatColor.RED+"- Unbanned -");
+                                } else {
+                                    sender.sendMessage(ChatColor.GRAY+"ERROR: Could not find "+args[1]+" on Banned-Players list...");
+                                }
+                            } else {
+                                //Online
+                                Player offlinePlayer = Bukkit.getPlayer(args[1]);
+                                if(this.settings.getStringList("Banned-Players").contains(offlinePlayer.getUniqueId().toString())) {
+                                    sender.sendMessage(ChatColor.RED+"- Unbanned -");
+                                } else {
+                                    sender.sendMessage(ChatColor.GRAY+"ERROR: Could not find "+args[1]+" on Banned-Players list...");
+                            }
+                        }
+                        this.unbanPlayer(args[1]);
                     } else
                     if(args[0].equalsIgnoreCase("unexclude")) {
-                        this.unExclude(args[1]);
                         System.out.print("Console attempting to set player un-excluded...");
+                            sender.sendMessage(ChatColor.DARK_RED+"Attempting to set player un-excluded...");
+                            if(Bukkit.getPlayer(args[1]) == null) {
+                                //Offline
+                                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[1]);
+                                if(this.settings.getStringList("Excluded-Players").contains(offlinePlayer.getUniqueId().toString())) {
+                                    sender.sendMessage(ChatColor.RED+"- Unexcluded -");
+                                } else {
+                                    sender.sendMessage(ChatColor.GRAY+"ERROR: Could not find "+args[1]+" on Excluded-Players list...");
+                                }
+                            } else {
+                                //Online
+                                Player offlinePlayer = Bukkit.getPlayer(args[1]);
+                                if(this.settings.getStringList("Excluded-Players").contains(offlinePlayer.getUniqueId().toString())) {
+                                    sender.sendMessage(ChatColor.RED+"- Unexcluded -");
+                                } else {
+                                    sender.sendMessage(ChatColor.GRAY+"ERROR: Could not find "+args[1]+" on Excluded-Players list...");
+                            }
+                        }
+                        this.unExclude(args[1]);
                     }
                     break;
             }
