@@ -188,6 +188,7 @@ public class Main extends JavaPlugin implements Listener {
     }
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         if(cmd.getName().equalsIgnoreCase("trial")) {
+            if(sender.hasPermission("ServerTrials.Admin")) {
             //Help Menu
             /* ./trial - Open help menu
 ./trial exclude <player> - Exclude this player from the trial.
@@ -277,6 +278,7 @@ public class Main extends JavaPlugin implements Listener {
                         this.unExclude(args[1]);
                     }
                     break;
+                }
             }
         }
         return true;
