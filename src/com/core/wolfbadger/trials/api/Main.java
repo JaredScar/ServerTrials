@@ -26,7 +26,6 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(this, this);
         this.settings = getConfig();
-        this.settings.options().copyDefaults(true);
         this.saveDefaultConfig();
         switch (TrialType.valueOf(this.settings.getString("Trial-Type"))) {
             case DAY:
